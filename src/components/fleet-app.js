@@ -8,16 +8,39 @@ import {
   Left,
   Right,
   Body,
-  Icon
+  Icon,
+  View,
+  Text
 } from 'native-base';
 
 import Drawer from 'react-native-drawer';
 
 import DrawerContent from '../components/drawer-content';
 
+import { Router, Scene } from 'react-native-router-flux';
+
 const drawerStyles = {
   drawer: { backgroundColor: '#cecece', shadowOpacity: 0.8, shadowRadius: 3},
 }
+
+const Home = () => (
+  <Text style={{backgroundColor: '#000000'}}>
+    Home
+  </Text>
+)
+
+const About = () => (
+  <Text style={{backgroundColor: '#cecece'}}>
+    About
+  </Text>
+)
+
+const Topics = () => (
+  <Text style={{backgroundColor: '#ffffff'}}>
+    topics
+  </Text>
+)
+
 
 class FleetApp extends Component {
   constructor(props) {
@@ -48,7 +71,6 @@ class FleetApp extends Component {
           </Body>
           <Right />
         </Header>
-        {this.isDrawerOpen}
         <Drawer
           content={<DrawerContent />}
           tapToClose={true}
@@ -56,6 +78,25 @@ class FleetApp extends Component {
           styles={drawerStyles}
           open={this.state.isDrawerOpen}
           >
+          <Router>
+            <Scene key="root">
+              <Scene key="home"
+                component={Home}
+                title="Home"
+                initial
+              />
+              <Scene
+                key="about"
+                component={About}
+                title="About"
+              />
+              <Scene
+                key="topics"
+                component={Topics}
+                title="Topics"
+              />
+            </Scene>
+          </Router>
         </Drawer>
       </Container>
     );
