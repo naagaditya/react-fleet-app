@@ -43,10 +43,10 @@ const Topics = () => (
 
 
 class FleetApp extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {isDrawerOpen: false};
-  }
+  };
 
   closeDrawer = () => {
     this.setState({isDrawerOpen: false});
@@ -57,7 +57,11 @@ class FleetApp extends Component {
   toggleDrawer = () => {
     this.setState({isDrawerOpen: !this.state.isDrawerOpen});
   };
+
+
   render() {
+    const drawerContent = <DrawerContent onCloseDrawer={this.closeDrawer} />;
+
     return (
       <Container>
         <Header>
@@ -72,29 +76,17 @@ class FleetApp extends Component {
           <Right />
         </Header>
         <Drawer
-          content={<DrawerContent />}
+          content={drawerContent}
           tapToClose={true}
           openDrawerOffset={0.2} // 20% gap on the right side of drawer 
           styles={drawerStyles}
           open={this.state.isDrawerOpen}
-          >
+        >
           <Router>
             <Scene key="root">
-              <Scene key="home"
-                component={Home}
-                title="Home"
-                initial
-              />
-              <Scene
-                key="about"
-                component={About}
-                title="About"
-              />
-              <Scene
-                key="topics"
-                component={Topics}
-                title="Topics"
-              />
+              <Scene key="home" component={Home} title="Home"initial />
+              <Scene key="about" component={About} title="About"/>
+              <Scene key="topics" component={Topics} title="Topics"/>
             </Scene>
           </Router>
         </Drawer>

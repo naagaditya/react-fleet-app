@@ -9,16 +9,26 @@ import {
 import { Actions } from 'react-native-router-flux';
 
 class DrawerContent extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  changeScene = (sceneName) => {
+    Actions[sceneName]();
+    this.props.onCloseDrawer && this.props.onCloseDrawer();
+  };
+
   render () {
     return (
       <Container>
-        <Button full light onPress={() => Actions.home()}>
+        <Button full light onPress={() => this.changeScene('home')}>
           <Text>Home</Text>
         </Button>
-        <Button full light onPress={() => Actions.about()}>
+        <Button full light onPress={() => this.changeScene('about')}>
           <Text>About</Text>
         </Button>
-        <Button full light onPress={() => Actions.topics()}>
+        <Button full light onPress={() => this.changeScene('topics')}>
           <Text>Topics</Text>
         </Button>
       </Container>
