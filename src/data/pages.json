@@ -1,0 +1,10 @@
+[
+  {
+    name: 'home',
+    component: 'Home'
+  },
+  {
+    name: 'about',
+    component: 'About'
+  }
+]

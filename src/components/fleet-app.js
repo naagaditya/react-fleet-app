@@ -16,36 +16,20 @@ import {
 import Drawer from 'react-native-drawer';
 
 import DrawerContent from '../components/drawer-content';
-
-import { Router, Scene } from 'react-native-router-flux';
+import Main from '../components/main';
+import Login from '../components/login';
 
 const drawerStyles = {
   drawer: { backgroundColor: '#cecece', shadowOpacity: 0.8, shadowRadius: 3},
 }
 
-const Home = () => (
-  <Text style={{backgroundColor: '#000000'}}>
-    Home
-  </Text>
-)
-
-const About = () => (
-  <Text style={{backgroundColor: '#cecece'}}>
-    About
-  </Text>
-)
-
-const Topics = () => (
-  <Text style={{backgroundColor: '#ffffff'}}>
-    topics
-  </Text>
-)
-
-
 class FleetApp extends Component {
   constructor() {
     super();
-    this.state = {isDrawerOpen: false};
+    this.state = {
+      isDrawerOpen: false,
+      isUserLoggedIn: true
+    };
   };
 
   closeDrawer = () => {
@@ -61,8 +45,7 @@ class FleetApp extends Component {
 
   render() {
     const drawerContent = <DrawerContent onCloseDrawer={this.closeDrawer} />;
-
-    return (
+    const fleetAppContent = 
       <Container>
         <Header>
           <Left>
@@ -82,16 +65,12 @@ class FleetApp extends Component {
           styles={drawerStyles}
           open={this.state.isDrawerOpen}
         >
-          <Router>
-            <Scene key="root">
-              <Scene key="home" component={Home} title="Home"initial />
-              <Scene key="about" component={About} title="About"/>
-              <Scene key="topics" component={Topics} title="Topics"/>
-            </Scene>
-          </Router>
+          <Main/>
         </Drawer>
-      </Container>
-    );
+      </Container>;
+
+
+    return (this.state.isUserLoggedIn ? fleetAppContent : <Login/>);
   }
 }
 
