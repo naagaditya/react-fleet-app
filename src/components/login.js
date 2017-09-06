@@ -10,17 +10,44 @@ import {
   Body,
   Icon,
   View,
-  Text
+  Text,
+  Content,
+  Form,
+  Item,
+  Input
 } from 'native-base';
 
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+  };
+
+  login = () => {
+    this.props.onLogin && this.props.onLogin();
   };
 
   render() {
     return (
-      <Text>login</Text>
+      <Container>
+        <Header>
+          <Body>
+            <Title>Zoom Fleet</Title>
+          </Body>
+        </Header>
+        <Content>
+          <Form>
+            <Item>
+              <Input placeholder="Username" />
+            </Item>
+            <Item last>
+              <Input placeholder="Password" />
+            </Item>
+          </Form>
+          <Button onPress={this.login} block>
+            <Text>Login</Text>
+          </Button>
+        </Content>
+      </Container>
     );
   }
 }

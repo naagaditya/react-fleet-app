@@ -28,7 +28,7 @@ class FleetApp extends Component {
     super();
     this.state = {
       isDrawerOpen: false,
-      isUserLoggedIn: true
+      isUserLoggedIn: false
     };
   };
 
@@ -42,6 +42,9 @@ class FleetApp extends Component {
     this.setState({isDrawerOpen: !this.state.isDrawerOpen});
   };
 
+  loginUser = () => {
+    this.setState({isUserLoggedIn: true});
+  };
 
   render() {
     const drawerContent = <DrawerContent onCloseDrawer={this.closeDrawer} />;
@@ -70,7 +73,7 @@ class FleetApp extends Component {
       </Container>;
 
 
-    return (this.state.isUserLoggedIn ? fleetAppContent : <Login/>);
+    return (this.state.isUserLoggedIn ? fleetAppContent : <Login onLogin={this.loginUser} />);
   }
 }
 
